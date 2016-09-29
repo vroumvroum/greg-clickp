@@ -7,11 +7,3 @@ install:
 after_success:
   - mvn tomcat7:redeploy || mvn tomcat7:deploy
 
-deploy:
-  provider: releases
-  api_key:
-    secure: "II7mzua8Kx+gI5xlF+CDhl3LB2wLy/CchxAutuJgbF5pXURCjFzQaQo+GYICOppTpq2cLGR8qpkZyLN1AYzvR/ER099tT/GDVZ+K88SBP6tnDJnB7S7BjappyWNxOOOoLkDmIbPdw0TzbpANdHANMkumh62DNhI8M6tGwtfkQfeeg1tZWfsQaW8bqXuM3C2QFdo4zabpSkKgcjSr16lGATvWx7cAYRommJF3QdF8j0tWv8HMQS6inKpVuMBYfSv3KdVaHYIH2Kv/NroXNfJyqy7rXWLMbMG6XjfJrhVRKvJVm32PjfgNzqm04L2q4W30IFlQUx3EHEpxE1htqMp6RpSwb6n0348iFAXWHqkIZi2y8ITmNeXeva/j83VymnQMHEYVDcSoa2JpVZQv5kAXQ+40vkOgOzxQLGYnbWL55qlJ39NzsE9q/D+P8SD4pjjUI8Zo8ghWBBVa0wqnQdyWzE3NdVP6V06wd6E0c9QjjK8q28NQmnufzOXNpEXKqnfAvOxweVnkXZefQWI9kk159FNNZP1P4PARIGdJ1b4Arv7KdGDBWH2IUD/sUQlnsENS+rqnL4wmY0GUTZOGVf1iDVba3TvKRrAohdguHEnkbp/z9Wzs0x6r7Rz35ekdEo/+SNSbGPUc+qxcNX2/0rf80QehTQedj0s/lGjq2TDyuYw="
-  file: target/clickCount.war 
-  skip_cleanup: true
-  on:
-    tags: true
