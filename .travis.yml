@@ -4,6 +4,9 @@ jdk:
 install:
   - mvn clean package
 
+after_success:
+  - mvn tomcat7:redeploy || mvn tomcat7:deploy
+
 deploy:
   provider: releases
   api_key:
