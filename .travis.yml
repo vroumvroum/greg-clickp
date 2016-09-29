@@ -4,7 +4,8 @@ jdk:
 install:
   - mvn clean package
 after_sucess:
-  - mvn tomcat7:deploy 
+  - mvn tomcat7:deploy > /tmp/deploy_status.txt
+  - cat /tmp/deploy_status.txt
 
 deploy:
   provider: releases
