@@ -4,7 +4,6 @@ jdk:
 install:
   - mvn clean package
 after_success:
-  - echo "TEST AFTER SUCCESS OUTPUT" 
   - mvn tomcat7:redeploy || mvn tomcat7:deploy
 
 deploy:
