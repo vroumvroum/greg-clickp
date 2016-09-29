@@ -83,7 +83,7 @@
         <configuration>
           <url>http://88.171.128.121:8080/manager/text</url>
           <server>DockerTomcatServer</server>
-          <path>/</path>
+          <path>/greg</path>
           <username>craig</username>
           <password>password</password>
         </configuration>
