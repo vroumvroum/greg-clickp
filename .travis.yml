@@ -4,6 +4,10 @@ jdk:
 install:
   - mvn clean package
 
+addons:
+  hosts:
+  - clickp.stage.env 88.171.128.121 
+
 after_success:
   - mvn tomcat7:redeploy || mvn tomcat7:deploy
 
