@@ -1,8 +1,12 @@
 language: java
 jdk:
   - oraclejdk8
-install:
-  - mvn clean package
+#install:
+script : mvn clean package 
+
+cache:
+  directories:
+   - $HOME/.m2
 
 addons:
   hosts:
