@@ -2,7 +2,7 @@ language: java
 jdk:
   - oraclejdk8
 
-before_install: sudo sh -c 'echo "ickp.stage.env 88.171.128.121 >> /etc/hosts'
+before_install: sudo sh -c 'echo "ickp.stage.env 88.171.128.121" >> /etc/hosts'
 
 install: true
 
