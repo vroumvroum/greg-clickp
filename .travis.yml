@@ -19,7 +19,7 @@ git:
   depth: 3
 
 after_success:
-  - if [[ $TRAVIS_BRANCH == "staging" ]]; then; mvn tomcat7:redeploy || mvn tomcat7:deploy; fi
+  - if [[ $TRAVIS_BRANCH == "staging" ]]; then mvn tomcat7:redeploy || mvn tomcat7:deploy; fi
 
 #default notification OK
 #notifications:
