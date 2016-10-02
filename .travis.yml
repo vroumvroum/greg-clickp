@@ -2,6 +2,8 @@ language: java
 jdk:
   - oraclejdk8
 
+before_install: sudo sh -c 'echo "ickp.stage.env 88.171.128.121 >> /etc/hosts'
+
 install: true
 
 script : mvn clean package
@@ -11,9 +13,9 @@ cache:
    - $HOME/.m2
 
 #Adress must be resolvable by DNS
-#addons:
-#  hosts:
-#  - clickp.stage.env 88.171.128.121
+addons:
+  hosts:
+  - clickp.stage.env 88.171.128.121
 
 git:
   depth: 3
