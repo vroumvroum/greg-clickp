@@ -20,7 +20,7 @@ public class ClickResourceTest extends JerseyTest {
     @Override
 	protected DeploymentContext configureDeployment() {
 		return ServletDeploymentContext.forServlet(new ServletContainer(
-                               new ResourceConfig(ClickResource.class))).build();
+                               new ResourceConfig(ClickResource.class))).contextPath("rest").build();
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class ClickResourceTest extends JerseyTest {
 	
 	@Test
 	public void testHealthcheck() {
-		Response output = target("test/healthcheck").request().get();
+		Response output = target("healthcheck").request().get();
 		assertEquals("Should return status 200", 200, output.getStatus());
 		assertEquals("Should return 'ok'", "ok", output.getEntity());
 	}
