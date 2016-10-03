@@ -14,6 +14,7 @@ import org.glassfish.jersey.test.spi.TestContainerFactory;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.test.ServletDeploymentContext;
 import org.glassfish.jersey.test.DeploymentContext;
+import fr.xebia.clickcount.repository.ClickRepository;
 
 public class ClickResourceTest extends JerseyTest {
 
