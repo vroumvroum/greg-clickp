@@ -9,16 +9,17 @@ import javax.ws.rs.core.Response;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import org.glassfish.jersey.test.grizzly.GrizzlyWebTestContainerFactory;
+import org.glassfish.jersey.test.spi.TestContainerException;
+import org.glassfish.jersey.test.spi.TestContainerFactory;
 
 public class ClickResourceTest extends JerseyTest {
-
-
 
 	@Override
 	public Application configure() {
 		enable(TestProperties.LOG_TRAFFIC);
 		enable(TestProperties.DUMP_ENTITY);
-		return new ResourceConfig(ClickResource.class);
+		return ServletDeploymentContext.forServlet(new ServletContainer(
+                               new ResourceConfig(ClickResource.class))).build();
 	}
 
 	@Override
