@@ -1,4 +1,4 @@
-package fr.xebia.clickcount
+package fr.xebia.clickcount;
 
 import fr.xebia.clickcount.web.resource.ClickResource;
 import javax.ws.rs.core.Application;
@@ -13,7 +13,7 @@ public class ClickResourceTest extends JerseyTest {
 	public Application configure() {
 		enable(TestProperties.LOG_TRAFFIC);
 		enable(TestProperties.DUMP_ENTITY);
-		return new ResourceConfig(ClickResource.class)
+		return new ResourceConfig(ClickResource.class);
 	}
 	
 	@Test
