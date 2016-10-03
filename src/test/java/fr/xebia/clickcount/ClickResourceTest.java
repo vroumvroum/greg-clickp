@@ -11,6 +11,7 @@ import static org.junit.Assert.assertEquals;
 import org.glassfish.jersey.test.grizzly.GrizzlyWebTestContainerFactory;
 import org.glassfish.jersey.test.spi.TestContainerException;
 import org.glassfish.jersey.test.spi.TestContainerFactory;
+import org.glassfish.jersey.servlet.ServletContainer;
 
 public class ClickResourceTest extends JerseyTest {
 
