@@ -8,14 +8,22 @@ import org.glassfish.jersey.test.TestProperties;
 import javax.ws.rs.core.Response;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
+import org.glassfish.jersey.test.grizzly.GrizzlyWebTestContainerFactory;
 
 public class ClickResourceTest extends JerseyTest {
+
+
 
 	@Override
 	public Application configure() {
 		enable(TestProperties.LOG_TRAFFIC);
 		enable(TestProperties.DUMP_ENTITY);
 		return new ResourceConfig(ClickResource.class);
+	}
+
+	@Override
+	protected TestContainerFactory getTestContainerFactory() throws TestContainerException {
+		return new GrizzlyWebTestContainerFactory();
 	}
 	
 	@Test
