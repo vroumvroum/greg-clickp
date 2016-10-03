@@ -6,6 +6,8 @@ import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 import org.glassfish.jersey.test.TestProperties;
 import javax.ws.rs.core.Response;
+import org.junit.Test;
+import org.junit.Assert.assertEquals;
 
 public class ClickResourceTest extends JerseyTest {
 

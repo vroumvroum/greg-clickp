@@ -24,8 +24,8 @@ after_success:
   - if [[ $TRAVIS_BRANCH == "staging" ]]; then mvn tomcat7:redeploy || mvn tomcat7:deploy; fi
 
 #default notification OK
-#notifications:
-#  email:
-#    on_success: [always|never|change] # default: change
-#    on_failure: [always|never|change] # default: always
+notifications:
+  email:
+    on_success: never
+    on_failure: never
 
