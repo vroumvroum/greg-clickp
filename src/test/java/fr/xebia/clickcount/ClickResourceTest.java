@@ -13,13 +13,12 @@ import org.glassfish.jersey.test.spi.TestContainerException;
 import org.glassfish.jersey.test.spi.TestContainerFactory;
 import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.test.ServletDeploymentContext;
+import org.glassfish.jersey.test.DeploymentContext;
 
 public class ClickResourceTest extends JerseyTest {
 
-	@Override
-	public Application configure() {
-		enable(TestProperties.LOG_TRAFFIC);
-		enable(TestProperties.DUMP_ENTITY);
+    @Override
+	protected DeploymentContext configureDeployment() {
 		return ServletDeploymentContext.forServlet(new ServletContainer(
                                new ResourceConfig(ClickResource.class))).build();
 	}
