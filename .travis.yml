@@ -5,7 +5,7 @@ before_install: sudo sh -c 'echo "clickp.stage.env 88.171.128.121" >> /etc/hosts
 install: true
 script: 
   #- mvn clean package
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.login=$SONAR_TOKEN
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.branch=$TRAVIS_BRANCH
 cache:
   directories:
   - "$HOME/.m2"
