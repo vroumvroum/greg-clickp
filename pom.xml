@@ -103,8 +103,8 @@
           <url>http://clickp.stage.env:8080/manager/text</url>
           <server>DockerTomcatServer</server>
           <path>/greg</path>
-          <username>greg</username>
-          <password>xebia</password>
+          <username>${TOMCAT_MANAGER_LOGIN}</username>
+          <password>${TOMCAT_MANAGER_PASSWORD}</password>
         </configuration>
      </plugin>
      </plugins>
