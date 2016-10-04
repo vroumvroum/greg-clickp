@@ -1,5 +1,6 @@
 language: java
 
+#Using the default oracleJdk8 proposed by Travis
 jdk:
   - oraclejdk8
 
