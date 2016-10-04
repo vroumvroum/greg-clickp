@@ -17,7 +17,7 @@ env:
 
 #Adding stage host to /etc/hosts
 before_install:
-  - sudo sh -c 'echo -e "\n\n${STAGE_HOST} ${STAGE_IP}" >> /etc/hosts'
+  - sudo sh -c 'echo "\n\n${STAGE_HOST} ${STAGE_IP}" >> /etc/hosts'
   - cat /etc/hosts
 
 #Skipping install phase
@@ -39,4 +39,4 @@ script:
 
 # We are on the staging branch, so we deploy the application automatically after a successfull build
 after_success:
-  - mvn tomcat7:redeploy || mvn tomcat7:deploy; fi
+  - mvn tomcat7:redeploy || mvn tomcat7:deploy 
