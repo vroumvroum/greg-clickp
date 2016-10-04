@@ -15,11 +15,13 @@ import org.glassfish.jersey.servlet.ServletContainer;
 import org.glassfish.jersey.test.ServletDeploymentContext;
 import org.glassfish.jersey.test.DeploymentContext;
 import fr.xebia.clickcount.repository.ClickRepository;
+import fr.xebia.clickcount.Application;
 
 public class ClickResourceTest extends JerseyTest {
 
     @Override
 	protected DeploymentContext configureDeployment() {
+		new Application().ApplicationBinder();
 		return ServletDeploymentContext.forServlet(new ServletContainer(
                                new ResourceConfig(ClickResource.class))).contextPath("rest").build();
 	}
