@@ -16,12 +16,14 @@ addons:
   sonarqube: true
 git:
   depth: 3
+
+# We are on the staging branch, so we deploy the application automatically after a successfull build
 after_success:
-  - if [[ $TRAVIS_BRANCH == "staging" ]]; then mvn tomcat7:redeploy || mvn tomcat7:deploy; fi
-notifications:
-  email:
-    on_success: never
-    on_failure: never
+  - mvn tomcat7:redeploy || mvn tomcat7:deploy; fi
+
+#Keeping notifications by default (change on success always on error)
+
+#Defining SONAR_TOKEN for sonarqube integration
 env:
   global:
   - secure: qrWqvYUSe2rHmv1Q3EMP92F6x035TYgWwYFxfHEXOZItV6Fjm/RXpjXJ8HZQrWDxCKfcgC0mVEfecdmy7z1GLwEDxMMUi3l/wFOqXL81MIGkzZNKxNuLpbYzSNcRPDELqPQ2vFgrva8b/OpmS2nsk8MmtVd/LEW9pf+gAJoeh7Ady6mbzHgrH3IwXwTBTmVHvKHqim5G4Q1u/Ba+sSSl74LvdLhzXfL+IKTa62+dgLuHoGk3+XPWV9z1vQK2CbEeba/oI+FUlasIPHYNQPTYwnm5H4ZoE14ljt+rOabPaw3CWrvICB0meFRzOcok3kfRYuLj1YSp1gCwhblmVUGh1d5qdRqRTlwZgsf0DlAPvI7YreOh/5g6/4ji4eQVryIAnAYx21TDMMTMHdmy4BGAuetzSYTRDoX3UyZsEkP0XM/zOFewIECltB0RsFosoBA7KMXtMAHnkbxvGcAbzExEgXJQ986hfnkPq3jLuRBFnIOoK3C4b1yEAK6X2v117YUZTQCraA7CFL4ae2eUVqWFOBWHRxyuDxtmvzSahPtAviE57sCJnPX8wDbjNvX0WQQSLYfTxXQH7GO1wFZxsEaZPVonjHyr1/eNpn3Z+tJwthsDccvsPfz54bVSfbdr27SXeq/ngjuKqIJc6zYn5pGoTKreDqzBEpEMyHsqRqVH7F8=
