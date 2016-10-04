@@ -6,7 +6,8 @@ before_install:
   - cat /etc/hosts
 install: true
 script:
-  - mvn clean -X org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.branch=$TRAVIS_BRANCH
+  - mvn clean -X org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar 
+    -Dsonar.login=$SONAR_TOKEN -Dsonar.branch=$TRAVIS_BRANCH
 cache:
   directories:
   - "$HOME/.m2"
