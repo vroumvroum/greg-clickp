@@ -17,7 +17,7 @@ env:
 
 #Adding stage host to /etc/hosts
 before_install:
-  - sudo sh -c 'echo "\n\n${STAGE_HOST} ${STAGE_IP}" >> /etc/hosts'
+  - sudo sh -c 'echo "\n\n${STAGE_IP} ${STAGE_HOST}" >> /etc/hosts'
   - cat /etc/hosts
 
 #Skipping install phase
@@ -35,7 +35,7 @@ addons:
 
 #Defining how to build. For stage environment, we want to make a quality check also
 script:
-  - mvn clean -X org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey="clickP_${TRAVIS_BRANCH}" 
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey="clickP_${TRAVIS_BRANCH}" 
 
 # We are on the staging branch, so we deploy the application automatically after a successfull build
 after_success:
