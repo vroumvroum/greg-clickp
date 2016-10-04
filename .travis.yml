@@ -1,8 +1,3 @@
-language: java
-jdk:
-  - oraclejdk8
-install:
-  - mvn clean package
 
 deploy:
   provider: releases
@@ -12,3 +7,35 @@ deploy:
   skip_cleanup: true
   on:
     tags: true
+
+language: java
+
+#Using the default oracleJdk8 proposed by Travis
+jdk:
+  - oraclejdk8
+
+#We don't need to retrieve all the commits
+git:
+  depth: 3
+
+#Secure key is for SONAR_TOKEN
+env:
+  global:
+    - secure: qrWqvYUSe2rHmv1Q3EMP92F6x035TYgWwYFxfHEXOZItV6Fjm/RXpjXJ8HZQrWDxCKfcgC0mVEfecdmy7z1GLwEDxMMUi3l/wFOqXL81MIGkzZNKxNuLpbYzSNcRPDELqPQ2vFgrva8b/OpmS2nsk8MmtVd/LEW9pf+gAJoeh7Ady6mbzHgrH3IwXwTBTmVHvKHqim5G4Q1u/Ba+sSSl74LvdLhzXfL+IKTa62+dgLuHoGk3+XPWV9z1vQK2CbEeba/oI+FUlasIPHYNQPTYwnm5H4ZoE14ljt+rOabPaw3CWrvICB0meFRzOcok3kfRYuLj1YSp1gCwhblmVUGh1d5qdRqRTlwZgsf0DlAPvI7YreOh/5g6/4ji4eQVryIAnAYx21TDMMTMHdmy4BGAuetzSYTRDoX3UyZsEkP0XM/zOFewIECltB0RsFosoBA7KMXtMAHnkbxvGcAbzExEgXJQ986hfnkPq3jLuRBFnIOoK3C4b1yEAK6X2v117YUZTQCraA7CFL4ae2eUVqWFOBWHRxyuDxtmvzSahPtAviE57sCJnPX8wDbjNvX0WQQSLYfTxXQH7GO1wFZxsEaZPVonjHyr1/eNpn3Z+tJwthsDccvsPfz54bVSfbdr27SXeq/ngjuKqIJc6zYn5pGoTKreDqzBEpEMyHsqRqVH7F8=
+
+#Skipping install phase
+install: true
+
+#Caching Maven and Sonar work directory to speed up the build
+cache:
+  directories:
+  - "$HOME/.m2"
+  - "$HOME/.sonar/cache"
+
+#Activating sonarqube addon (Cf. script phase)
+addons:
+  sonarqube: true
+
+#Defining how to build. For master environment (stable), we want to make a quality check also
+script:
+  - mvn clean -X org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey="clickP_${TRAVIS_BRANCH}"
