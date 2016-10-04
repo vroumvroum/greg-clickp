@@ -11,10 +11,8 @@ cache:
   directories:
   - "$HOME/.m2"
   - "$HOME/.sonar/cache"
-#addons:
-#  hosts:
-#  - clickp.stage.env 88.171.128.121
-#  sonarqube: true
+addons:
+  sonarqube: true
 git:
   depth: 3
 after_success:
