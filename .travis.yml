@@ -17,7 +17,7 @@ env:
 
 #Adding stage host to /etc/hosts
 before_install:
-  - sudo sh -c 'echo -n "${STAGE_HOST} ${STAGE_IP}" >> /etc/hosts'
+  - sudo sh -c 'echo -e "\n\n${STAGE_HOST} ${STAGE_IP}" >> /etc/hosts'
   - cat /etc/hosts
 
 #Skipping install phase
