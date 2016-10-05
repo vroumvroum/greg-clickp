@@ -22,7 +22,7 @@ env:
 before_install:
   - sudo sh -c 'echo "\n\n${STAGE_IP} ${STAGE_HOST}" >> /etc/hosts'
   - cat /etc/hosts
-  - sudo apt install mailutils
+  - sudo apt-get install mailutils
 
 #Skipping install phase
 install: true
