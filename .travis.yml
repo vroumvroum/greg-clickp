@@ -1,31 +1,40 @@
 language: java
+
+#Using the default oracleJdk8 proposed by Travis
 jdk:
   - oraclejdk8
 
-before_install: sudo sh -c 'echo "ickp.stage.env 88.171.128.121 >> /etc/hosts'
-
-install: true
-
-script : mvn clean package
-
-cache:
-  directories:
-   - $HOME/.m2
-
-#Adress must be resolvable by DNS
-addons:
-  hosts:
-  - clickp.stage.env 88.171.128.121
-
+#We don't need to retrieve all the commits
 git:
   depth: 3
 
-after_success:
-  - if [[ $TRAVIS_BRANCH == "staging" ]]; then mvn tomcat7:redeploy || mvn tomcat7:deploy; fi
+#Secure key is for SONAR_TOKEN
+env:
+  global:
+    - secure: qrWqvYUSe2rHmv1Q3EMP92F6x035TYgWwYFxfHEXOZItV6Fjm/RXpjXJ8HZQrWDxCKfcgC0mVEfecdmy7z1GLwEDxMMUi3l/wFOqXL81MIGkzZNKxNuLpbYzSNcRPDELqPQ2vFgrva8b/OpmS2nsk8MmtVd/LEW9pf+gAJoeh7Ady6mbzHgrH3IwXwTBTmVHvKHqim5G4Q1u/Ba+sSSl74LvdLhzXfL+IKTa62+dgLuHoGk3+XPWV9z1vQK2CbEeba/oI+FUlasIPHYNQPTYwnm5H4ZoE14ljt+rOabPaw3CWrvICB0meFRzOcok3kfRYuLj1YSp1gCwhblmVUGh1d5qdRqRTlwZgsf0DlAPvI7YreOh/5g6/4ji4eQVryIAnAYx21TDMMTMHdmy4BGAuetzSYTRDoX3UyZsEkP0XM/zOFewIECltB0RsFosoBA7KMXtMAHnkbxvGcAbzExEgXJQ986hfnkPq3jLuRBFnIOoK3C4b1yEAK6X2v117YUZTQCraA7CFL4ae2eUVqWFOBWHRxyuDxtmvzSahPtAviE57sCJnPX8wDbjNvX0WQQSLYfTxXQH7GO1wFZxsEaZPVonjHyr1/eNpn3Z+tJwthsDccvsPfz54bVSfbdr27SXeq/ngjuKqIJc6zYn5pGoTKreDqzBEpEMyHsqRqVH7F8=
 
-#default notification OK
-#notifications:
-#  email:
-#    on_success: [always|never|change] # default: change
-#    on_failure: [always|never|change] # default: always
+#Skipping install phase
+install: true
 
+#Caching Maven and Sonar work directory to speed up the build
+cache:
+  directories:
+  - "$HOME/.m2"
+  - "$HOME/.sonar/cache"
+
+#Activating sonarqube addon (Cf. script phase)
+addons:
+  sonarqube: true
+
+#Defining how to build. For production environment, we want to make a quality check also
+script:
+  - mvn clean -X org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey="clickP_${TRAVIS_BRANCH}"
+
+deploy:
+  provider: releases
+  api_key:
+    secure: "II7mzua8Kx+gI5xlF+CDhl3LB2wLy/CchxAutuJgbF5pXURCjFzQaQo+GYICOppTpq2cLGR8qpkZyLN1AYzvR/ER099tT/GDVZ+K88SBP6tnDJnB7S7BjappyWNxOOOoLkDmIbPdw0TzbpANdHANMkumh62DNhI8M6tGwtfkQfeeg1tZWfsQaW8bqXuM3C2QFdo4zabpSkKgcjSr16lGATvWx7cAYRommJF3QdF8j0tWv8HMQS6inKpVuMBYfSv3KdVaHYIH2Kv/NroXNfJyqy7rXWLMbMG6XjfJrhVRKvJVm32PjfgNzqm04L2q4W30IFlQUx3EHEpxE1htqMp6RpSwb6n0348iFAXWHqkIZi2y8ITmNeXeva/j83VymnQMHEYVDcSoa2JpVZQv5kAXQ+40vkOgOzxQLGYnbWL55qlJ39NzsE9q/D+P8SD4pjjUI8Zo8ghWBBVa0wqnQdyWzE3NdVP6V06wd6E0c9QjjK8q28NQmnufzOXNpEXKqnfAvOxweVnkXZefQWI9kk159FNNZP1P4PARIGdJ1b4Arv7KdGDBWH2IUD/sUQlnsENS+rqnL4wmY0GUTZOGVf1iDVba3TvKRrAohdguHEnkbp/z9Wzs0x6r7Rz35ekdEo/+SNSbGPUc+qxcNX2/0rf80QehTQedj0s/lGjq2TDyuYw="
+  file: target/clickCount.war
+  skip_cleanup: true
+  on:
+    tags: true
