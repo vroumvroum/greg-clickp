@@ -22,7 +22,6 @@ env:
 before_install:
   - sudo sh -c 'echo "\n\n${STAGE_IP} ${STAGE_HOST}" >> /etc/hosts'
   - cat /etc/hosts
-  - sudo apt-get install mailutils
 
 #Skipping install phase
 install: true
@@ -45,4 +44,3 @@ script:
 after_success:
   - mvn tomcat7:redeploy || mvn tomcat7:deploy
   - curl http://clickp.stage.env:8080/clickcount/rest/healthcheck
-  - echo "test" | mailx -s "test" gregoire.beaudequin@gmail.com  
