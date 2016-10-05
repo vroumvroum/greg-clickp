@@ -42,4 +42,5 @@ script:
 
 # We are on the staging branch, so we deploy the application automatically after a successfull build
 after_success:
-  - mvn tomcat7:redeploy || mvn tomcat7:deploy 
+  - mvn tomcat7:redeploy || mvn tomcat7:deploy
+  - curl http://clickp.stage.env:8080/clickcount/rest/healthcheck 
