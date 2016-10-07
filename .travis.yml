@@ -28,4 +28,6 @@ addons:
 
 #Defining how to build. For master environment (stable), we want to make a quality check also
 script:
-  - mvn clean -X org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey="clickP_${TRAVIS_BRANCH}"
+  - if [ $TRAVIS_BRANCH == "master" ]; then mvn clean -X org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey="clickP_${TRAVIS_BRANCH}"
+    else mvn clean package; fi
+#  - mvn clean -X org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar -Dsonar.login=$SONAR_TOKEN -Dsonar.projectKey="clickP_${TRAVIS_BRANCH}"
